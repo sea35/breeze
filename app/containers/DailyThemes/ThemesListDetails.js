@@ -1,5 +1,8 @@
 /**
- * Created by sea35 on 2016/10/10.
+ * Created by sea35 on 2016/12/9.
+ */
+/**
+ * Created by sea35 on 2016/12/9.
  */
 import React, {Component} from 'react'
 import {StyleSheet, Alert, TouchableOpacity,View} from 'react-native'
@@ -22,7 +25,10 @@ class DailyList extends Component {
         })
     }
     _renderRow(rowData, SectionId, rowID) {
-        const avatar=rowData.images[0];
+        let avatar =null;
+        if(rowData.images){
+            avatar=rowData.images[0];
+        }
         return (
             <TouchableOpacity onPress={()=>{this._openContent(rowData.id,rowData.title)}}>
                 <ListItem
@@ -40,26 +46,26 @@ class DailyList extends Component {
     }
 
     render() {
+        const id=this.props.dailyID;
         const getDataSource=function(pageNum,pageSize,loadDate){
-           return function () {
-               getApi.getDailyList(pageNum,(result)=>{
-                   if (result) {
-                       loadDate(result.stories)
-                   }
-                   else {
-                       Alert.alert('系统提示', '获取数据失败');
-                   }
-               })
-           }
+            return function () {
+                getApi.getThemesList(id,pageNum,(result)=>{
+                    if (result) {
+                        loadDate(result.stories)
+                    }
+                    else {
+                        Alert.alert('系统提示', '获取数据失败');
+                    }
+                })
+            }
         }
         return (
             <View className={styles.container}>
-                <NavigationBar title={'首页'}/>
-            <ListScroll
-                getDataSource={getDataSource}
-                renderRow={this._renderRow.bind(this)}
-                pageSize={8}
-            />
+                <ListScroll
+                    getDataSource={getDataSource}
+                    renderRow={this._renderRow.bind(this)}
+                    pageSize={8}
+                />
             </View>
         )
     }

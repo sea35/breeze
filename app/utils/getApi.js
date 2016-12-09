@@ -7,6 +7,8 @@ import moment from 'moment';
 const NEW_LATEST_LIST='http://news-at.zhihu.com/api/4/news/latest';
 const NEW_BEFORE_LIST='http://news.at.zhihu.com/api/4/news/before/';
 const NEW_CONTENT='http://news-at.zhihu.com/api/4/news/';
+const NEW_THEMES='http://news-at.zhihu.com/api/4/themes';
+const NEW_THEMES_LIST='http://news-at.zhihu.com/api/4/theme/';
 module.exports = {
     /**
      * 根据时间获取日报数据列表(最长一周的数据)
@@ -16,7 +18,7 @@ module.exports = {
      */
     getDailyList: (page, callback, err) => {
         if (page > 7) {
-            callback(null);
+            callback({stories:{}});
             return;
         }
         if (page == 1) {
@@ -37,6 +39,26 @@ module.exports = {
     getDaily: (id, callback, err) => {
         const url = NEW_CONTENT + id;
         httpHelper.get(url, null, callback, err);
+    },
+    /**
+     * 主题日报列表查看
+     * @param callback
+     * @param err
+     */
+    getThemes: (page,callback, err) => {
+        if(page>1){
+            callback({others:{}});
+            return;
+        }
+        const url = NEW_THEMES;
+        httpHelper.get(url, null, callback, err);
+    },
+    getThemesList: (id,page,callback, err) => {
+        if(page>1){
+            callback({others:{}});
+            return;
+        }
+        const url = NEW_THEMES_LIST+id;
+        httpHelper.get(url, null, callback, err);
     }
-
 }

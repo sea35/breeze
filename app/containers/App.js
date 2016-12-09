@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {TabNavigator} from '../components/base';
 
 import DailyList from './Daily/DailyList';
+import ThemesList from './DailyThemes/ThemesList';
 
 class App extends Component {
     constructor(props){
@@ -15,10 +16,6 @@ class App extends Component {
             selectedTab: 'home'
         }
     }
-    renderContent(pageText) {
-        return (
-            <Text>{pageText}</Text>
-        )}
     render() {
         return (
             <TabNavigator>
@@ -32,11 +29,11 @@ class App extends Component {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'profile'}
-                    title="我"
-                    renderIcon={() => <Icon name="book" size={25} color="#929292"/>}
-                    renderSelectedIcon={() => <Icon name="book" size={25} color="rgb(0, 122, 255)"/>}
+                    title="主题"
+                    renderIcon={() => <Icon name="leanpub" size={25} color="#929292"/>}
+                    renderSelectedIcon={() => <Icon name="leanpub" size={25} color="rgb(0, 122, 255)"/>}
                     onPress={() => this.setState({ selectedTab: 'profile' })}>
-                    {this.renderContent('Profile')}
+                    <ThemesList title="知乎日报" navigator={this.props.navigator}/>
                 </TabNavigator.Item>
             </TabNavigator>
         )
