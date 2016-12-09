@@ -4,7 +4,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, Alert, TouchableOpacity,WebView,Animated,PixelRatio,Image,View,Text,ScrollView} from 'react-native'
 let Dimensions = require('Dimensions');// 宽高
-
 import {getApi} from '../../utils';
 
 var WIDTH_SIZE =Dimensions.get('window').width;
@@ -13,10 +12,8 @@ class DailyContent extends Component{
     constructor(props){
         super(props);
         this.state={
-            html:'',
-            data:{},
-            scrollY: 0,
-            scrollValue: new Animated.Value(0)
+            html:''
+
         }
         this.getHtml();
     }
@@ -33,30 +30,20 @@ class DailyContent extends Component{
                 + data.css[0]
                 + '" /></head><body>' + html
                 + '</body></html>';
-            this.setState({html:html,data:data});
+            this.setState({html:html});
         },(err)=>{
             this.setState({html:'文章加载失败'});
         })
     }
     render(){
-        if(!this.state.data){
-            return;
-        }
+
         return(
-            <WebView
-                style={[styles.webViewContainer,{flex:1}]}
-                source ={{html:this.state.html}}
-            >
+            <WebView   source ={{html:this.state.html}} >
             </WebView>
         )
     }
 }
 const  styles = StyleSheet.create({
-    webViewContainer: {
-        backgroundColor: 'rgb(240,240,240)',
-        width: Dimensions.get('window').width,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
+
 })
 export default DailyContent;

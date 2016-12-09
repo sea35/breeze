@@ -2,10 +2,11 @@
  * Created by sea35 on 2016/10/10.
  */
 import React, {Component} from 'react'
-import {StyleSheet, Alert, TouchableOpacity} from 'react-native'
-import {ListItem, ListScroll} from '../../components/base'
+import {StyleSheet, Alert, TouchableOpacity,View} from 'react-native'
+import {ListItem, ListScroll,NavigationBar} from '../../components/base'
 import {getApi} from '../../utils';
 import DailyContent from './DailyContent';
+
 
 class DailyList extends Component {
     constructor(props) {
@@ -17,21 +18,9 @@ class DailyList extends Component {
         this.props.navigator.push({
             component: DailyContent,
             title:'详细内容',
-            //params:{html:html}
             params:{dailyID:id,dailyTitle:title}
         })
     }
-    // _getHtml(id){
-    //     getApi.getDaily(id,(data)=>{
-    //         var html = '<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="'
-    //             + data.css[0]
-    //             + '" /></head><body>' + data.body
-    //             + '</body></html>';
-    //         this._openContent(html);
-    //     },(err)=>{
-    //         this._openContent('文章加载失败....');
-    //     })
-    // }
     _renderRow(rowData, SectionId, rowID) {
         const avatar=rowData.images[0];
         return (
@@ -64,15 +53,24 @@ class DailyList extends Component {
            }
         }
         return (
+            <View className={styles.container}>
+                <NavigationBar title={'首页'}/>
             <ListScroll
                 getDataSource={getDataSource}
                 renderRow={this._renderRow.bind(this)}
                 pageSize={8}
             />
+            </View>
         )
     }
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#FFEFDB',
+
+    },
+})
 module.exports = DailyList;
 

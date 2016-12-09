@@ -24,16 +24,15 @@ class App extends Component {
             <TabNavigator>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'home'}
-                    title="Home"
+                    title="首页"
                     renderIcon={() => <Icon name="book" size={25} color="#929292"/>}
                     renderSelectedIcon={() => <Icon name="book" size={25} color="rgb(0, 122, 255)"/>}
-                    badgeText="1"
                     onPress={() => this.setState({ selectedTab: 'home' })}>
                     <DailyList title="知乎日报" navigator={this.props.navigator}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'profile'}
-                    title="Profile"
+                    title="我"
                     renderIcon={() => <Icon name="book" size={25} color="#929292"/>}
                     renderSelectedIcon={() => <Icon name="book" size={25} color="rgb(0, 122, 255)"/>}
                     onPress={() => this.setState({ selectedTab: 'profile' })}>
