@@ -1,4 +1,4 @@
-## breeze
+## breeze Introduction
 Based on the react-native implementation of news mobile client, compatible with android and ios. If you have any questions or suggestions, welcome message feedback, the author will be the first time to reply, thank you!
 ## Project Screenshots
 ![](./assets/display.gif)
